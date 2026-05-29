@@ -1,0 +1,4 @@
+music_tag==0.4.3
+mutagen==1.46.0
+Requests==2.34.2
+setuptools==68.1.2
