@@ -31,6 +31,3 @@ for music in music_files:
     
 	    print(f"After: {new_name}")
 	    print("-" * 30)
-   else:
- 	   pass
-    
