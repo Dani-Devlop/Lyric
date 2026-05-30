@@ -1,12 +1,3 @@
-# RoadMap:
-# *   1. Os get musics file
-# *   2. if you want , clear name file
-# *   3. get name and singer
-# *   4. search and get lyric and get output lyric.txt
-# *   5. add lyric to music
-# *   6. make folder for modified music!
-# *   7. Save music
-
 import os
 import re
 import music_tag
