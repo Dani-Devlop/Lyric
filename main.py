@@ -32,22 +32,27 @@ answer = (
 
 if answer == "y":
     pattern = re.compile(r"^.*?(?=[A-Z])")
+
     for music in music_files:
         old_path = os.path.join(music_folder, music)
         new_name = pattern.sub("", music)
+
         if new_name == music:
             print(f"⏩ Skipping (no change): {music}")
             continue
         new_path = os.path.join(music_folder, new_name)
+
         if os.path.exists(new_path):
             print(f"⚠️  Conflict: '{new_name}' already exists. Skipping '{music}'")
             continue
         try:
             os.rename(old_path, new_path)
             print(f"✅ Renamed: {music} → {new_name}")
+
         except Exception as e:
             print(f"❌ Error renaming '{music}': {e}")
         print("-" * 30)
+
     # Re‑scan after renaming
     music_files = [f for f in os.listdir(music_folder) if f.lower().endswith(".mp3")]
 
@@ -127,6 +132,7 @@ def append_lyric(music_path):
 
     try:
         f = music_tag.load_file(music_path)
+
         if f.get("lyrics"):
             print(
                 f"ℹ️  {os.path.basename(music_path)} already has lyrics – not overwriting."
@@ -136,6 +142,7 @@ def append_lyric(music_path):
             os.makedirs(output_dir, exist_ok=True)
             out_path = os.path.join(output_dir, os.path.basename(music_path))
             f.save(out_path)
+
         else:
             f["lyrics"] = lyric
             output_dir = "music/output"
@@ -156,8 +163,8 @@ for music in music_files:
 
     if name_singer:
         # print(f"✅ {music} → {name_singer}")
-
         lyrics = get_lyric(name_singer)
+
         if lyrics:
             append_lyric(full_path)
         else:
@@ -166,6 +173,8 @@ for music in music_files:
     else:
         print(f"⚠️  {music} → missing artist or title")
 
+
+os.remove("lyric.txt")
 
 if noneHaveName:
     print("\n❌ The following files have no artist/title information:")
