@@ -30,3 +30,5 @@ def fetch_lyrics(query: str) -> str:
 
     print(f"⚠️  No lyrics found for: {query}")
     return ""
+    
+    
