@@ -1,24 +1,26 @@
-#from mutagen import  *
-#from mutagen.mp3 import MP3
+# from mutagen import  *
+# from mutagen.mp3 import MP3
 
-#audio = MP3("04. J. Cole - Old Dog.mp3")
-#print(audio.info.length)
-#print(audio.info.bitrate)
-
-
-#from mutagen import File
-
-#audio = File("J. Cole - Old Dog.mp3")
+# audio = MP3("04. J. Cole - Old Dog.mp3")
+# print(audio.info.length)
+# print(audio.info.bitrate)
 
 
-#if audio is not None:
+# from mutagen import File
+
+# audio = File("J. Cole - Old Dog.mp3")
+
+
+# if audio is not None:
 #    from mutagen.easyid3 import EasyID3
 #    audio = EasyID3(audio.filename)
 
-#audio["title"] = "Old Dog"
-#audio.save()
+# audio["title"] = "Old Dog"
+# audio.save()
 
 import music_tag
+
+print
 import os
 
 lyric = """Alone at parties in a deadly silhouette
@@ -60,18 +62,19 @@ She's a 90's supermodel, uh-uh-uh
 She's a 90's supermodel, uh-uh-uh
 Okay"""
 
-f = music_tag.load_file('04. J. Cole - Old Dog.mp3')
+f = music_tag.load_file("04. J. Cole - Old Dog.mp3")
 
-#f['lyrics'] = 
+# f['lyrics'] =
 #
-#art = f['lyrics']
-#f.save()
-#print(art)
+# art = f['lyrics']
+# f.save()
+# print(art)
 
 from mutagen.id3 import ID3, USLT, ID3NoHeaderError
 
 # بارگذاری فایل
 file_path = "04. J. Cole - Old Dog.mp3"
+
 
 # ایجاد یا بارگذاری تگ ID3
 try:
@@ -80,21 +83,18 @@ except ID3NoHeaderError:
     tags = ID3()
 
 # حذف لیریک قبلی (اختیاری)
-tags.delall('USLT')
+tags.delall("USLT")
 
 # اضافه کردن لیریک جدید
-tags.add(USLT(
-    encoding=3,           # 3 = UTF-8
-    lang='eng',           # کد زبان
-    desc='',              # توضیحات (می‌تواند خالی باشد)
-    text= lyric
-))
+tags.add(
+    USLT(encoding=3, lang="eng", desc="", text=lyric)  # 3 = UTF-8  # Could be empty
+)
 
-audio = '04. J. Cole - Old Dog.mp3'
+audio = "04. J. Cole - Old Dog.mp3"
 
 audio["title"] = "Old Dog"
 audio.save()
 
 tags.save(file_path)
 
-print("✅ لیریک با موفقیت اضافه شد!")
+print("✅ Success , lyric added to musix")

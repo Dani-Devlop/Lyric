@@ -1,36 +1,36 @@
-#from azapi import AZlyrics
+# from musicxmatch_api import MusixMatchAPI
+#  Lyrica
+# lrxy lrxy -p musixmatch -f lrc song.mp3
+def get_lyric(fullName: str):
+    def write_on_output(lyric):
+        with open("lyric.txt", "w") as l:
+            l.write(lyric)
 
-# Names should be passed corrrectly
-# If you can't remember, use google or duckduckgo
-# AZlyrics('google')
-#api = AZlyrics()
+    """
+    Full name like :  Old Dog J. Cole ( Song name , artist)
+    """
+    import syncedlyrics
 
-#api.artist = "Taylor Swift"
-#api.title = "Blank Space"
+    try:
+        providers = [
+            "LrcLib",
+            "NetEase",
+            "Musixmatch",
+            "Megalobiz",
+        ]
+        lrc = syncedlyrics.search(fullName, providers=providers, plain_only=True)
+        # lrc = syncedlyrics.search(fullName, providers=providers)
 
-#api.getLyrics(save=True)
+        ######## TODO Check it!
+        write_on_output(lrc)
+        return lrc
 
-#################################
-
-import json
-from musicxmatch_api import MusixMatchAPI
-
-api = MusixMatchAPI()
-
-try:
-    search = api.search_tracks("skyfall")
-    print("--- Success! ---")
-    print(json.dumps(search, indent=4))
-except Exception as e:
-    print(f"--- Error Occurred: {e} ---")
-    
-    # Inspect the last response directly from the underlying session
-    if hasattr(api, 'session') and api.session:
-        last_response = getattr(api, 'last_response', None)
-        if last_response:
-            print(f"\nStatus Code: {last_response.status_code}")
-            print("Raw Response Text (first 500 chars):")
-            
-#print(json.dumps(search, indent=4)))
+    except:
+        providers = ["Genius"]
+        lrc = syncedlyrics.search(fullName, providers=providers, plain_only=True)
+        ######## TODO Check it!
+        write_on_output(lrc)
+        return lrc
 
 
+print(get_lyric("Old Dog J. Cole"))
