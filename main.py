@@ -21,6 +21,7 @@ for lib in ["urllib3", "requests", "syncedlyrics"]:
 
 ########################################################
 # ---------- 1. Get music files ----------
+os.mkdir("music/input")
 music_folder = "music/input"
 music_files = [f for f in os.listdir(music_folder) if f.lower().endswith(".mp3")]
 
