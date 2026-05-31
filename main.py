@@ -5,8 +5,6 @@ from src.metadata import get_song_artist, embed_lyrics
 from src.lyrics_fetcher import fetch_lyrics
 from src.utils import setup_logging, delete_temp_lyrics
 
-print("kos")
-
 
 def main():
     setup_logging()
